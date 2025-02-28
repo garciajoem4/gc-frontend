@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import { Avatar } from 'antd';
 
 const Container = styled.div`
   border-radius: 10px;
@@ -23,11 +22,6 @@ const Container = styled.div`
 
 const TextContent = styled.div``;
 
-const Icons = styled.div`
-  display: flex;
-  justify-content: end;
-  padding: 2px;
-`;
 const bgcolorChange = props => {
   let color = '';
 

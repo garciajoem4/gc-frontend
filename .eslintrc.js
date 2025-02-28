@@ -1,18 +1,17 @@
-// Instead of module.exports, use export default
-export default {
+/* eslint-disable no-undef */
+
+module.exports = {
   env: {
     browser: true,
-    es2021: true,
-    node: true
+    es2021: true
   },
   extends: [
     'airbnb',
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
     'plugin:jsx-a11y/recommended',
-    'eslint:recommended',
-    'eslint:all',
-    'plugin:react/all'
+    'plugin:react/jsx-runtime'
   ],
   parserOptions: {
     ecmaFeatures: {
