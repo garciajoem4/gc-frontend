@@ -2,54 +2,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 import Card from './Card';
 import './scroll.css';
 
-const Container = styled.div`
-  background-color: #f4f5f7;
-  border-radius: 2.5px;
-  width: 400px;
-  height: 900px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  border: 1px solid gray;
-`;
-
-const Title = styled.h3`
-  padding: 8px;
-  background-color: pink;
-  text-align: center;
-`;
-
-const TaskList = styled.div`
-  padding: 3px;
-  transistion: background-color 0.2s ease;
-  background-color: #f4f5f7;
-  flex-grow: 1;
-  min-height: 100px;
-`;
-
 const Column = ({ title, tasks, id }) => {
   return (
-    <Container className="column">
-      <Title
-        style={{
-          backgroundColor: 'lightblue',
-          position: 'sticky',
-          top: '0'
-        }}
-      >
+    <div className="column flex-1 h-[600px] overflow-y-scroll border border-1 border-gray bg-[#f4f5f7]">
+      <div className="mt-0 px-8 py-4 text-center text-white font-bold bg-blue-500 sticky top-0">
         {title}
-      </Title>
+      </div>
       <Droppable droppableId={id}>
         {(provided, snapshot) => (
-          <TaskList
+          <div
+            className="p-4 min-h-[100px] grow-1 bg-[#f4f5f7]"
             ref={provided.innerRef}
-            {...provided.droppableProps}
-            isDraggingOver={snapshot.isDraggingOver}
           >
             {tasks.map((task, index) =>
               task !== undefined ? (
@@ -57,10 +24,10 @@ const Column = ({ title, tasks, id }) => {
               ) : null
             )}
             {provided.placeholder}
-          </TaskList>
+          </div>
         )}
       </Droppable>
-    </Container>
+    </div>
   );
 };
 

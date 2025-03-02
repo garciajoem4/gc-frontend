@@ -82,20 +82,11 @@ const Board = () => {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexDirection: 'row',
-          width: '1300px',
-          margin: '0 auto'
-        }}
-      >
-        <Column title="TO DO" tasks={incomplete} id="1" />
-        <Column title="DONE" tasks={completed} id="2" />
-        <Column title="IN REVIEW" tasks={inReview} id="3" />
-        <Column title="BACKLOG" tasks={backlog} id="4" />
+      <div className="w-full mx-auto max-w-[1200px] p-8 flex flex-row justify-between items-center">
+        <Column title="SEGMENT" tasks={incomplete} id="1" />
+        <Column title="JOBS" tasks={completed} id="2" />
+        <Column title="PAINS" tasks={inReview} id="3" />
+        <Column title="GAINS" tasks={backlog} id="4" />
       </div>
     </DragDropContext>
   );
