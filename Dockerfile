@@ -7,14 +7,14 @@ RUN npm install --frozen-lockfile
 
 
 FROM node:21-alpine AS builder
-WORKDIR /app
+WORKDIR /src
 COPY . .
 COPY --from=deps /node_modules ./node_modules
 RUN export NODE_OPTIONS=--openssl-legacy-provider && npm run build && npm install --production --ignore-scripts --prefer-offline
 
 
 FROM node:21-alpine AS runner
-WORKDIR /app
+WORKDIR /src
 
 ENV NODE_ENV production
 
