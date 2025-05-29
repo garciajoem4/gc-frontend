@@ -1,0 +1,40 @@
+name: Deploy application
+
+on:
+  push:
+    brances:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Build docker image
+        run: docker build -t 447728/growth-club-docker-frontend .
+        
+      - name: Login to docker hub
+        run: docker login -u "garciajoem4@gmail.com" -p "52h3;F4#dh!@ZCt"
+
+      - name: Publich docker image to docker hub
+        run: docker push 447728/growth-club-docker-frontend:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull 447728/growth-club-docker-frontend:latest
+
+      - name: Delete old docker container
+        run: docker rm -f growth-club
+
+      - name: Remove unused images
+        run: |
+          docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+          alias drmae='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+        
+      - name: Run docker container
+        run: docker run -d -p 3000:3000 --name growth-club 447728/growth-club-docker-frontend
